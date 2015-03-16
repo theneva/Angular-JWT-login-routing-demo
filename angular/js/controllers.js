@@ -9,6 +9,12 @@ app.config(function($routeProvider) {
 		.otherwise({controller: 'NotFoundController', templateUrl: 'templates/not_found.html'});
 });
 
+app.controller('ApplicationController', function($scope) {
+	$scope.$on('loggedin', function(event, username) {
+		$scope.currentUser = username;
+	})
+});
+
 app.controller('MainController', function($scope, $location, LoginService, PersonService) {
 	PersonService.findAll()
 		.success(function(people) {
@@ -27,6 +33,7 @@ app.controller('LoginController', function($scope, $location, LoginService) {
 
 		LoginService.login(username, password)
 			.then(function() {
+				$scope.$emit('loggedin', username);
 				$location.path('/');
 			});
 	};

@@ -24,8 +24,24 @@ app.post('/sessions', function(req, res) {
 		return res.status(401).send('Invalid username or password');
 	}
 
-	var token = jwt.encode({}, secret);
+	var token = jwt.encode({username: loginAttempt.username}, secret);
 	res.status(201).send(token);
+});
+
+app.get('/user', function(req, res) {
+	var token = req.header('authorization');
+
+	if (!token) {
+		return res.status(401).send('No token supplied');
+	}
+
+	var payload = jwt.decode(token, secret);
+
+	if (username !== 'theneva') {
+		return res.status(401).send('No such user');
+	}
+
+	return res.json({username: 'theneva'});
 });
 
 app.get('/api/people', function(req, res) {
