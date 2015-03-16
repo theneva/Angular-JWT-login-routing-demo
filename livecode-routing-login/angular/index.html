@@ -5,7 +5,19 @@
 	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css"/>
 	<title>Login demo app thing</title>
 </head>
-<body>
+<body ng-controller="ApplicationController">
+	<nav class="navbar navbar-default">
+		<div class="container">
+			<ul class="nav navbar-nav">
+				<li><a href="/#/">Contacts</a></li>
+				<li><a href="/#/login">Log in</a></li>
+			</ul>
+
+			<p class="navbar-text navbar-right" ng-if="currentUser">
+				Signed in as {{currentUser.username}}
+			</p>
+		</div>
+	</nav>
 	<div class="container" ng-view></div>
 <script src="bower_components/angular/angular.min.js"></script>
 <script src="bower_components/angular-route/angular-route.min.js"></script>

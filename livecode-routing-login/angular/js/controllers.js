@@ -18,10 +18,17 @@ app.config(function($routeProvider) {
 		});
 });
 
+app.controller('ApplicationController', function($scope) {
+	$scope.$on('loggedin', function(event, user) {
+		$scope.currentUser = user;
+	});
+});
+
 app.controller('LoginController', function($scope, $location, LoginService) {
 	$scope.login = function(username, password) {
 		LoginService.login(username, password)
 			.then(function() {
+				$scope.$emit('loggedin', {username: username})
 				$location.path('/');
 			});
 	};
