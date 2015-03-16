@@ -7,7 +7,7 @@ app.controller('MainController', function($scope, LoginService, PersonService) {
 				.success(function(people) {
 					$scope.people = people;
 				});
-		})
+	});
 });
 
 app.service('LoginService', function($http) {
