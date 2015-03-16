@@ -1,4 +1,5 @@
 var app = angular.module('loginDemo', [
+	'ngRoute',
 ]);
 
 app.controller('MainController', function($scope, LoginService, UserService) {
