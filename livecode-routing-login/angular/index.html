@@ -2,11 +2,21 @@
 <html lang="en" ng-app="loginDemo">
 <head>
 	<meta charset="UTF-8">
+	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css"/>
 	<title>Login demo app thing</title>
 </head>
 <body ng-controller="MainController">
 
-{{message}}
+<div class="container">
+	<table class="table">
+		<tr>
+			<th>Username</th>
+		</tr>
+		<tr ng-repeat="user in users">
+			<td>{{user.username}}</td>
+		</tr>
+	</table>
+</div>
 
 <script src="bower_components/angular/angular.min.js"></script>
 <script src="js/controllers.js"></script>
