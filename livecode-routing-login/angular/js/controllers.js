@@ -2,6 +2,22 @@ var app = angular.module('loginDemo', [
 	'ngRoute',
 ]);
 
+app.config(function($routeProvider) {
+	$routeProvider
+		.when('/', {
+			controller: 'MainController',
+			templateUrl: 'templates/main.html'
+		})
+		.otherwise({
+			controller: 'NotFoundController',
+			templateUrl: 'templates/not_found.html'
+		});
+});
+
+app.controller('NotFoundController', function($scope) {
+	$scope.message = 'Not found!';
+});
+
 app.controller('MainController', function($scope, LoginService, UserService) {
 	LoginService.login('theneva', 'ananas')
 		.then(function() {
