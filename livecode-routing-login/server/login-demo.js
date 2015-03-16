@@ -12,9 +12,9 @@ app.get('/api', function(req, res) {
 
 app.get('/api/users', function(req, res) {
 	res.json([
-		{username: 'theneva'},
-		{username: 'eivindveg'},
-		{username: 'j0nas'}
+		{username: 'theneva', phone: '32478972'},
+		{username: 'eivindveg', phone: '78493893'},
+		{username: 'j0nas', phone: '37284923'}
 	]);
 });
 
