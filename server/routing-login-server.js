@@ -37,7 +37,7 @@ app.get('/user', function(req, res) {
 
 	var payload = jwt.decode(token, secret);
 
-	if (username !== 'theneva') {
+	if (payload.username !== 'theneva') {
 		return res.status(401).send('No such user');
 	}
 
