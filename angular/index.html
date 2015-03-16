@@ -7,8 +7,17 @@
 </head>
 <body>
 
-<!-- This is the only thing we care about. -->
+<!-- This is the only section we care about. -->
+<nav class="navbar navbar-default">
+	<div class="container">
+		<ul class="nav navbar-nav">
+			<li><a href="/#/">Users</a></li>
+			<li><a href="/#/login">Login</a></li>
+		</ul>
+	</div>
+</nav>
 <div class="container" ng-view></div>
+<!-- End stuff we care about -->
 
 <script src="bower_components/angular/angular.min.js"></script>
 <script src="bower_components/angular-route/angular-route.min.js"></script>
