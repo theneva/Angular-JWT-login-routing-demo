@@ -2,6 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var jwt = require('jwt-simple');
 var mongoose = require('mongoose');
+var bcrypt = require('bcrypt');
 
 var app = express();
 
@@ -41,7 +42,7 @@ app.post('/api/sessions', function(req, res) {
 		}
 
 		// 2. sammenlikn passord
-		if (loginAttempt.password !== user.password) {
+		if (!bcrypt.compareSync(loginAttempt.password, user.password)) {
 			return res.status(401).send('Wrong username or password');
 		}
 
