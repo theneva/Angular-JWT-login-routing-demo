@@ -6,7 +6,9 @@
 </head>
 <body ng-controller="MainController">
 
-{{someMessage}}
+<ul ng-repeat="person in people">
+	<li>Username: {{person.username}}</li>
+</ul>
 
 <script src="bower_components/angular/angular.min.js"></script>
 <script src="js/controllers.js"></script>
