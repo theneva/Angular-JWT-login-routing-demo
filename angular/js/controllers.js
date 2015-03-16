@@ -1,5 +1,12 @@
 var app = angular.module('routingLoginDemo', [
+	'ngRoute',
 ]);
+
+app.config(function($routeProvider) {
+	$routeProvider
+		.when('/', {controller: 'MainController', templateUrl: 'templates/main.html'})
+		.otherwise({controller: 'NotFoundController', templateUrl: 'templates/not_found.html'});
+});
 
 app.controller('MainController', function($scope, LoginService, PersonService) {
 	LoginService.login().then(function() {
@@ -8,6 +15,10 @@ app.controller('MainController', function($scope, LoginService, PersonService) {
 					$scope.people = people;
 				});
 	});
+});
+
+app.controller('NotFoundController', function($scope) {
+	$scope.message = 'Not found!';
 });
 
 app.service('LoginService', function($http) {

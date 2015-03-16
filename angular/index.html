@@ -4,13 +4,12 @@
 <meta charset="UTF-8">
 <title>Document</title>
 </head>
-<body ng-controller="MainController">
+<body>
 
-<ul ng-repeat="person in people">
-	<li>Username: {{person.username}}</li>
-</ul>
+<div ng-view></div>
 
 <script src="bower_components/angular/angular.min.js"></script>
+<script src="bower_components/angular-route/angular-route.min.js"></script>
 <script src="js/controllers.js"></script>
 </body>
 </html>
