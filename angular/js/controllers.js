@@ -22,5 +22,5 @@ app.service('LoginService', function($http) {
 app.service('PersonService', function($http) {
 	this.findAll = function() {
 		return $http.get('/api/people');
-	}
+	};
 });
