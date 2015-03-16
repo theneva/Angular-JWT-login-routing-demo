@@ -1,5 +1,6 @@
 var express = require('express'),
 	jwt = require('jwt-simple'),
+	bcrypt = require('bcrypt'),
     bodyParser = require('body-parser');
 
 var app = express();
@@ -19,8 +20,13 @@ app.post('/sessions', function(req, res) {
 		return res.status(401).send('Request must contain {username, password}');
 	}
 
-	if (loginAttempt.username !== 'theneva'
-		|| loginAttempt.password !== 'ananas') {
+	if (loginAttempt.username !== 'theneva') {
+		return res.status(401).send('Invalid username or password');
+	}
+
+	if (!bcrypt.compareSync(
+			loginAttempt.password,
+			'$2a$10$biddApalzPNVxoNBhZ5CaOhGRgdAuO.VUTJW2jA/pxlloYUav8HbS')) {
 		return res.status(401).send('Invalid username or password');
 	}
 
