@@ -35,11 +35,6 @@ app.post('/sessions', function(req, res) {
 			return res.status(401).send('Invalid username or password');
 		}
 
-		console.log(person);
-
-		console.log('password hash:');
-		console.log(person['passwordHash']);
-
 		if (!bcrypt.compareSync(
 				loginAttempt.password,
 				person.passwordHash)) {
