@@ -1,10 +1,20 @@
 var express = require('express'),
 	jwt = require('jwt-simple'),
 	bcrypt = require('bcrypt'),
+	mongoose = require('mongoose');
     bodyParser = require('body-parser');
 
 var app = express();
 var secret = 'some long secret';
+
+mongoose.connect('mongodb://localhost/routingLoginDemo', function() {
+	console.log('connected to mongodb');
+});
+
+var Person = mongoose.model('Person', {
+	username: String,
+	passwordHash: String
+});
 
 app.use(bodyParser.json());
 app.use('/', express.static(__dirname + '/../angular'));
@@ -20,18 +30,25 @@ app.post('/sessions', function(req, res) {
 		return res.status(401).send('Request must contain {username, password}');
 	}
 
-	if (loginAttempt.username !== 'theneva') {
-		return res.status(401).send('Invalid username or password');
-	}
+	Person.findOne({username: loginAttempt.username}, function(err, person) {
+		if (!person) {
+			return res.status(401).send('Invalid username or password');
+		}
 
-	if (!bcrypt.compareSync(
-			loginAttempt.password,
-			'$2a$10$biddApalzPNVxoNBhZ5CaOhGRgdAuO.VUTJW2jA/pxlloYUav8HbS')) {
-		return res.status(401).send('Invalid username or password');
-	}
+		console.log(person);
 
-	var token = jwt.encode({username: loginAttempt.username}, secret);
-	res.status(201).send(token);
+		console.log('password hash:');
+		console.log(person['passwordHash']);
+
+		if (!bcrypt.compareSync(
+				loginAttempt.password,
+				person.passwordHash)) {
+			return res.status(401).send('Invalid username or password');
+		}
+
+		var token = jwt.encode({username: loginAttempt.username}, secret);
+		res.status(201).send(token);
+	});
 });
 
 app.get('/user', function(req, res) {
