@@ -2,11 +2,13 @@
 <html lang="en" ng-app="routingLoginDemo">
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css"/>
 <title>Document</title>
 </head>
 <body>
 
-<div ng-view></div>
+<!-- This is the only thing we care about. -->
+<div class="container" ng-view></div>
 
 <script src="bower_components/angular/angular.min.js"></script>
 <script src="bower_components/angular-route/angular-route.min.js"></script>

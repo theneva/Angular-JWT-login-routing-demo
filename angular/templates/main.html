@@ -1,3 +1,8 @@
-<ul ng-repeat="person in people">
-	<li>Username: {{person.username}}</li>
-</ul>
+<table class="table">
+	<tr>
+		<th>Username</th>
+	</tr>
+	<tr ng-repeat="person in people">
+		<td>{{person.username}}</td>
+	</tr>
+</table>
